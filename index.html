@@ -7,8 +7,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>Zorglux</h1>
+  <header class="container">
     <nav>
       <ul>
         <li><a href="index.html">Accueil</a></li>
@@ -20,13 +19,55 @@
   </header>
   <main>
     <section class="hero">
-      <h2>Bienvenue sur le site de Zorglux</h2>
-      <p>Découvrez l'univers artistique unique d'un peintre hors du commun</p>
-      <a href="#" class="cta-button">Explorez sa galerie</a>
+      <div class="slideshow-container">
+        <div class="slides">
+          <img src="assets/zorglux_femme4.jpg" alt="Zorglux femme 1">
+          <img src="assets/zorglux_femme3.jpg" alt="Zorglux femme 2">
+          <img src="assets/zorglux_femme1.jpg" alt="Zorglux femme 3">
+          <img src="assets/zorglux_femme2.jpg" alt="Zorglux femme">
+          <img src="assets/zorglux_et_zorglux.jpg" alt="Zorglux et Zorglux">
+          <img src="assets/zorglux_piano.jpg" alt="Zorglux piano">
+          <img src="assets/zorglux_party.jpg" alt="Zorglux party">
+          <img src="assets/zorglux_night.jpg" alt="Zorglux night">
+          <img src="assets/zorglux_crush.jpg" alt="Zorglux crush">
+        </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+      </div>
+      <a href="#" class="cta-button">See More</a>
     </section>
+    
   </main>
   <footer>
     <p>&copy; 2024 Zorglux. Tous droits réservés.</p>
   </footer>
+
+
+  <script>
+    const slides = document.querySelector('.slides');
+    const prevButton = document.querySelector('.prev');
+    const nextButton = document.querySelector('.next');
+
+    let slideIndex = 0;
+
+    function showSlides() {
+      slides.style.transform = `translateX(-${slideIndex * 100}%)`;
+    }
+
+    prevButton.addEventListener('click', () => {
+      if (slideIndex === 0) return;
+      slideIndex--;
+      showSlides();
+    });
+
+    nextButton.addEventListener('click', () => {
+      if (slideIndex === slides.children.length - 1) return;
+      slideIndex++;
+      showSlides();
+    });
+
+    showSlides();
+
+    </script>
 </body>
 </html>
