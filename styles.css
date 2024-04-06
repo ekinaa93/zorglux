@@ -110,6 +110,20 @@ footer {
   position: relative;
 }
 
+.social-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centrer horizontalement les éléments */
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.social-icon {
+  width: 30px; /* Ajustez la taille des icônes selon vos besoins */
+  height: 30px;
+  margin-right: 10px; /* Espacement entre les icônes */
+}
+
 .slides {
   display: flex;
   transition: transform 0.5s ease;
