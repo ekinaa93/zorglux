@@ -269,16 +269,3 @@ footer {
 .contact-section button:hover {
   background-color: #555;
 }
-.social-links ul {
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-}
-.social-links ul li {
-  display: inline;
-  margin-right: 10px;
-}
-.social-links ul li a {
-  color: #333;
-  text-decoration: none;
-}
