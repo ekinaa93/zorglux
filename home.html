@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zorglux Art - Explore Exquisite Paintings</title>
-    <meta name="description" content="Discover the captivating artworks of Zorglux, an artist known for his unique and eclectic paintings. Explore his biography, gallery, and contact information."> <!-- Added meta description -->
-    <meta name="author" content="Hema et Racha">
+    <meta name="keywords" content="zorglux, blog, art, artiste, tableau, fou, covid, musée">
+    <meta name="description" content="Découvrez les œuvres captivantes de Zorglux, un artiste connu pour ses peintures uniques et éclectiques. Explorez sa biographie, sa galerie et ses coordonnées.">
+    <meta name="author" content="Zorglux">
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
   <header class="container">
     <nav>
       <ul>
-        <li><a href="index.html">Accueil</a></li> 
+        <li><a href="home.html">Accueil</a></li> 
         <li><a href="gallery.html">Galerie</a></li>
         <li><a href="biography.html">Biographie</a></li>
         <li><a href="contact.html">Contact</a></li>
@@ -62,30 +64,42 @@
 
 
   <script>
-    const slides = document.querySelector('.slides');
-    const prevButton = document.querySelector('.prev');
-    const nextButton = document.querySelector('.next');
+   const slides = document.querySelector('.slides');
+const prevButton = document.querySelector('.prev');
+const nextButton = document.querySelector('.next');
 
-    let slideIndex = 0;
+let slideIndex = 0;
 
-    function showSlides() {
-      slides.style.transform = `translateX(-${slideIndex * 100}%)`;
-    }
+function showSlides() {
+  const slideWidth = slides.firstElementChild.clientWidth; // Largeur d'une diapositive
+  const numVisibleSlides = Math.floor(window.innerWidth / slideWidth); // Nombre de diapositives visibles sur l'écran
+  const totalSlides = slides.children.length;
 
-    prevButton.addEventListener('click', () => {
-      if (slideIndex === 0) return;
-      slideIndex--;
-      showSlides();
-    });
+  if (slideIndex >= totalSlides - numVisibleSlides) {
+    nextButton.disabled = true;
+  } else {
+    nextButton.disabled = false;
+  }
+  slides.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+}
 
-    nextButton.addEventListener('click', () => {
-      if (slideIndex === slides.children.length - 1) return;
-      slideIndex++;
-      showSlides();
-    });
+prevButton.addEventListener('click', () => {
+  if (slideIndex === 0) return;
+  slideIndex--;
+  showSlides();
+});
 
+nextButton.addEventListener('click', () => {
+  const slideWidth = slides.firstElementChild.clientWidth;
+  const numVisibleSlides = Math.floor(window.innerWidth / slideWidth); 
+  const totalSlides = slides.children.length; 
+
+  if (slideIndex < totalSlides - numVisibleSlides) {
+    slideIndex++;
     showSlides();
-
-    </script>
+  }
+});
+showSlides();
+  </script>
 </body>
 </html>

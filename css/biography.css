@@ -1,0 +1,16 @@
+.biography-section {
+    max-width: 800px;
+    margin: auto;
+}
+
+.biography-section h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.biography-section p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+}
