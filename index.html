@@ -12,6 +12,46 @@
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/index.css">
+    <style>
+        /* Add responsive styles */
+        .slideshow-container {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slides img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+    </style>
 </head>
 <body>
   <header>
@@ -50,7 +90,6 @@
       </div>
       <a href="gallery.html" class="cta-button">Voir plus</a>
     </section>
-    
   </main>
   <footer>
     <p>Suivez-moi sur les réseaux sociaux :</p>
@@ -77,44 +116,71 @@
     <p>&copy; 2024 Zorglux. Tous droits réservés.</p>
   </footer>
 
-
   <script>
-   const slides = document.querySelector('.slides');
-const prevButton = document.querySelector('.prev');
-const nextButton = document.querySelector('.next');
+    const slides = document.querySelector('.slides');
+    const prevButton = document.querySelector('.prev');
+    const nextButton = document.querySelector('.next');
+    
+    let slideIndex = 0;
 
-let slideIndex = 0;
+    function showSlides() {
+      const slideWidth = slides.firstElementChild.clientWidth; // Largeur d'une diapositive
+      const numVisibleSlides = Math.floor(window.innerWidth / slideWidth); // Nombre de diapositives visibles sur l'écran
+      const totalSlides = slides.children.length;
+      
+      if (slideIndex >= totalSlides - numVisibleSlides) {
+        nextButton.disabled = true;
+      } else {
+        nextButton.disabled = false;
+      }
+      if (slideIndex === 0) {
+        prevButton.disabled = true;
+      } else {
+        prevButton.disabled = false;
+      }
+      slides.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+    }
+    
+    prevButton.addEventListener('click', () => {
+      if (slideIndex === 0) return;
+      slideIndex--;
+      showSlides();
+    });
 
-function showSlides() {
-  const slideWidth = slides.firstElementChild.clientWidth; // Largeur d'une diapositive
-  const numVisibleSlides = Math.floor(window.innerWidth / slideWidth); // Nombre de diapositives visibles sur l'écran
-  const totalSlides = slides.children.length;
+    nextButton.addEventListener('click', () => {
+      const slideWidth = slides.firstElementChild.clientWidth;
+      const numVisibleSlides = Math.floor(window.innerWidth / slideWidth); 
+      const totalSlides = slides.children.length; 
 
-  if (slideIndex >= totalSlides - numVisibleSlides) {
-    nextButton.disabled = true;
-  } else {
-    nextButton.disabled = false;
-  }
-  slides.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
-}
+      if (slideIndex < totalSlides - numVisibleSlides) {
+        slideIndex++;
+        showSlides();
+      }
+    });
 
-prevButton.addEventListener('click', () => {
-  if (slideIndex === 0) return;
-  slideIndex--;
-  showSlides();
-});
+    // Handle touch events for mobile devices
+    let touchStartX = 0;
+    let touchEndX = 0;
 
-nextButton.addEventListener('click', () => {
-  const slideWidth = slides.firstElementChild.clientWidth;
-  const numVisibleSlides = Math.floor(window.innerWidth / slideWidth); 
-  const totalSlides = slides.children.length; 
+    slides.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
 
-  if (slideIndex < totalSlides - numVisibleSlides) {
-    slideIndex++;
+    slides.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleGesture();
+    });
+
+    function handleGesture() {
+      if (touchEndX < touchStartX) {
+        nextButton.click();
+      }
+      if (touchEndX > touchStartX) {
+        prevButton.click();
+      }
+    }
+
     showSlides();
-  }
-});
-showSlides();
   </script>
 </body>
 </html>
