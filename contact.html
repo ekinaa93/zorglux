@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -12,6 +11,41 @@
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/contact.css">
   <link rel="stylesheet" href="css/common.css">
+  <style>
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0,0,0);
+      background-color: rgba(0,0,0,0.4);
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 400px;
+      text-align: center;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -30,7 +64,7 @@
     <section class="contact-section">
       <h2>Contactez-moi</h2>
       <p>Pour toute demande d'information ou de collaboration, n'hésitez pas à me contacter :</p>
-      <form action="#" method="post">
+      <form id="contactForm" action="#" method="post">
         <div>
           <label for="name">Nom :</label>
           <input type="text" id="name" name="name" required>
@@ -57,9 +91,6 @@
       <a href="https://www.instagram.com/zorglux_art" target="_blank" rel="noopener">
         <img src="assets/Instagram.png" alt="Instagram" class="social-icon-insta">
       </a>
-      <!-- <a href="https://www.linkedin.com/in/zorglux/" target="_blank" rel="noopener">
-        <img src="assets/linkedin.png" alt="LinkedIn" class="social-icon">
-      </a> -->
       <a href="https://www.pinterest.fr/zorglux_art/" target="_blank" rel="noopener">
         <img src="assets/pinterest.png" alt="Pinterest" class="social-icon">
       </a>
@@ -72,5 +103,41 @@
     </div>
     <p>&copy; 2024 Zorglux. Tous droits réservés.</p>
   </footer>
+
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Message envoyé avec succès! Zorglux vous répondra sous peu. Vous recevrez la réponse dans votre mail.</p>
+    </div>
+  </div>
+
+  <script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user submits the form
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Display the modal
+      modal.style.display = "block";
+    });
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
 </body>
 </html>
