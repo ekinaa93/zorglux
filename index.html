@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/index.css">
     <style>
-        /* Add responsive styles */
         .slideshow-container {
             overflow: hidden;
             position: relative;
@@ -43,6 +42,7 @@
             border-radius: 0 3px 3px 0;
             user-select: none;
             background-color: rgba(0,0,0,0.5);
+            z-index: 10;
         }
         .next {
             right: 0;
@@ -50,6 +50,18 @@
         }
         .prev:hover, .next:hover {
             background-color: rgba(0,0,0,0.8);
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px 0;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .cta-button:hover {
+            background-color: #555;
         }
     </style>
 </head>
@@ -142,12 +154,14 @@
     }
     
     prevButton.addEventListener('click', () => {
+      console.log('Prev button clicked');
       if (slideIndex === 0) return;
       slideIndex--;
       showSlides();
     });
 
     nextButton.addEventListener('click', () => {
+      console.log('Next button clicked');
       const slideWidth = slides.firstElementChild.clientWidth;
       const numVisibleSlides = Math.floor(window.innerWidth / slideWidth); 
       const totalSlides = slides.children.length; 
@@ -173,9 +187,11 @@
 
     function handleGesture() {
       if (touchEndX < touchStartX) {
+        console.log('Swiped left');
         nextButton.click();
       }
       if (touchEndX > touchStartX) {
+        console.log('Swiped right');
         prevButton.click();
       }
     }
