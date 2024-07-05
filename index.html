@@ -13,43 +13,17 @@
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/index.css">
     <style>
-        .slideshow-container {
-            overflow: hidden;
-            position: relative;
-            width: 100%;
-            max-width: 100%;
-        }
-        .slides {
+        .gallery-preview {
             display: flex;
-            transition: transform 0.5s ease-in-out;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
-        .slides img {
+        .gallery-preview img {
             max-width: 100%;
             height: auto;
             display: block;
-        }
-        .prev, .next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            width: auto;
-            margin-top: -22px;
-            padding: 16px;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-            transition: 0.6s ease;
-            border-radius: 0 3px 3px 0;
-            user-select: none;
-            background-color: rgba(0,0,0,0.5);
-            z-index: 10;
-        }
-        .next {
-            right: 0;
-            border-radius: 3px 0 0 3px;
-        }
-        .prev:hover, .next:hover {
-            background-color: rgba(0,0,0,0.8);
+            width: 23%;
         }
         .cta-button {
             display: inline-block;
@@ -79,24 +53,11 @@
   <img src="./assets/zorglux.png" alt="zorglux_art">
   <main>
     <section class="hero">
-      <div class="slideshow-container">
-        <div class="slides">
-          <img src="assets/zorglux_femme4.jpg" alt="Zorglux femme 1">
-          <img src="assets/zorglux_femme3.jpg" alt="Zorglux femme 2">
-          <img src="assets/zorglux_femme1.jpg" alt="Zorglux femme 3">
-          <img src="assets/zorglux_femme2.jpg" alt="Zorglux femme">
-          <img src="assets/zorglux_et_zorglux.jpg" alt="Zorglux et Zorglux">
-          <img src="assets/zorglux_piano.jpg" alt="Zorglux piano">
-          <img src="assets/zorglux_party.jpg" alt="Zorglux party">
-          <img src="assets/zorglux_night.jpg" alt="Zorglux night">
-          <img src="assets/zorglux_crush.jpg" alt="Zorglux crush">
-          <img src="assets/zorglux_accordeon_homme.jpg" alt="Zorglux accordeon homme">
-          <img src="assets/zorglux_accordeon.jpg" alt="Zorglux accordeon">
-          <img src="assets/zorglux_debout_jo.jpg" alt="Zorglux debout jo">
-          <img src="assets/zorglux_velo_jo.jpg" alt="Zorglux velo jo">
-        </div>
-        <button class="prev">&#10094;</button>
-        <button class="next">&#10095;</button>
+      <div class="gallery-preview">
+        <img src="assets/zorglux_femme4.jpg" alt="Zorglux femme 1">
+        <img src="assets/zorglux_femme3.jpg" alt="Zorglux femme 2">
+        <img src="assets/zorglux_femme1.jpg" alt="Zorglux femme 3">
+        <img src="assets/zorglux_femme2.jpg" alt="Zorglux femme 4">
       </div>
       <a href="gallery.html" class="cta-button">Voir plus</a>
     </section>
@@ -110,7 +71,6 @@
       <a href="https://www.instagram.com/zorglux_art" target="_blank" rel="noopener">
         <img src="assets/Instagram.png" alt="Instagram" class="social-icon-insta">
       </a>
-      
       <a href="https://www.pinterest.fr/zorglux_art/" target="_blank" rel="noopener">
         <img src="assets/pinterest.png" alt="Pinterest" class="social-icon">
       </a>
@@ -123,76 +83,5 @@
     </div>
     <p>&copy; 2024 Zorglux. Tous droits réservés.</p>
   </footer>
-
-  <script>
-    const slides = document.querySelector('.slides');
-    const prevButton = document.querySelector('.prev');
-    const nextButton = document.querySelector('.next');
-    
-    let slideIndex = 0;
-
-    function showSlides() {
-      const slideWidth = slides.firstElementChild.clientWidth; // Largeur d'une diapositive
-      const numVisibleSlides = Math.floor(window.innerWidth / slideWidth); // Nombre de diapositives visibles sur l'écran
-      const totalSlides = slides.children.length;
-      
-      if (slideIndex >= totalSlides - numVisibleSlides) {
-        nextButton.disabled = true;
-      } else {
-        nextButton.disabled = false;
-      }
-      if (slideIndex === 0) {
-        prevButton.disabled = true;
-      } else {
-        prevButton.disabled = false;
-      }
-      slides.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
-    }
-    
-    prevButton.addEventListener('click', () => {
-      console.log('Prev button clicked');
-      if (slideIndex === 0) return;
-      slideIndex--;
-      showSlides();
-    });
-
-    nextButton.addEventListener('click', () => {
-      console.log('Next button clicked');
-      const slideWidth = slides.firstElementChild.clientWidth;
-      const numVisibleSlides = Math.floor(window.innerWidth / slideWidth); 
-      const totalSlides = slides.children.length; 
-
-      if (slideIndex < totalSlides - numVisibleSlides) {
-        slideIndex++;
-        showSlides();
-      }
-    });
-
-    // Handle touch events for mobile devices
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    slides.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    });
-
-    slides.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleGesture();
-    });
-
-    function handleGesture() {
-      if (touchEndX < touchStartX) {
-        console.log('Swiped left');
-        nextButton.click();
-      }
-      if (touchEndX > touchStartX) {
-        console.log('Swiped right');
-        prevButton.click();
-      }
-    }
-
-    showSlides();
-  </script>
 </body>
 </html>
