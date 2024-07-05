@@ -1,5 +1,5 @@
 User-agent: *
-Disallow: /private/
+
 Allow: /
 
 Sitemap: https://zorglux.eu/sitemap.xml
